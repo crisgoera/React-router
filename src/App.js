@@ -13,10 +13,10 @@ function App() {
         <Layout />
         <Routes>
             <Route path = '/' element = {<Home />}/>
-            <Route path = '/newpost' element = {<NewPost/>} />
+            <Route path = '/post' element = {<NewPost/>} />
+            <Route path = '/post/:id' element = {<PostPage/>} />
             <Route path = '/about' element = {<About/>} />
-            <Route path = '/postpage' element = {<PostPage/>} />
-            <Route path = '/nmissing' element = {<Missing/>} />
+            <Route path = '/*' element = {<Missing/>} />
         </Routes>
         </div>
     );
