@@ -38,8 +38,15 @@ function App() {
           title: "My Fourth Post",
           datetime: "July 01, 2021 11:17:36 AM",
           body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis consequatur expedita, assumenda similique non optio! Modi nesciunt excepturi corrupti atque blanditiis quo nobis, non optio quae possimus illum exercitationem ipsa!"
-        }
+        },
+        {
+            id: 5,
+            title: "My Test Post",
+            datetime: "July 01, 2021 11:17:36 AM",
+            body: "Test text for the filter function"
+          }
       ]);
+    const [filteredPosts, setFilteredPosts] = useState(null);
 
     const navigate = useNavigate();
 
@@ -57,12 +64,26 @@ function App() {
         setPosts(postsList);
         setPostTitle('');
         setPostBody('');
-        navigate('/')
+        navigate('/');
     }
 
     const handleDelete = (id) => {
-        setPosts(posts.filter((post) => post.id !== id))
-        navigate('/')
+        setPosts(posts.filter((post) => post.id !== id));
+        navigate('/');
+    }
+
+    const handleSearch = (search) => {
+        setSearch(search)
+
+        if (search !== '') {
+            setFilteredPosts(
+                posts.filter(
+                    (post) => (post.body.toLowerCase()).includes(search) === true
+                )
+            )
+        } else {
+            setFilteredPosts(null)
+        }
     }
 
     return (
@@ -70,10 +91,15 @@ function App() {
             <Header title = "React JS Blog" />
             <NavBar
                 search = {search}
-                setSearch = {setSearch}
+                handleSearch = {handleSearch}
             />
             <Routes>
-                <Route path = '/' element = {<Home posts = {posts}/>}/>
+                <Route path = '/' element = {
+                    (filteredPosts)
+                    ? <Home posts = {filteredPosts}/>
+                    :  <Home posts = {posts} />
+                }/>
+
                 <Route path = '/post' element = {<NewPost
                         postTitle = {postTitle}
                         setPostTitle = {setPostTitle}
