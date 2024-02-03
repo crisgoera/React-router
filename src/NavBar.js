@@ -1,6 +1,6 @@
 import { Link} from 'react-router-dom'
 
-const NavBar = ( {search, setSearch} ) => {
+const NavBar = ( {search, handleSearch} ) => {
     return (
         <main className="NavBar">
             <form className="searchForm" onSubmit = {(e)=> e.preventDefault()}>
@@ -8,7 +8,7 @@ const NavBar = ( {search, setSearch} ) => {
                 <input
                     autoFocus
                     type="text"
-                    onChange = {(e)=>setSearch(e.target.value)}
+                    onChange = {(e)=>handleSearch(e.target.value)}
                     role = "searchbox"
                     placeholder = "Search posts"
                     required
