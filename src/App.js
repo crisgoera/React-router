@@ -78,8 +78,9 @@ function App() {
         if (search !== '') {
             setFilteredPosts(
                 posts.filter(
-                    (post) => (post.body.toLowerCase()).includes(search) === true
-                )
+                    (post) => (post.body.toLowerCase().includes(search.toLowerCase()) ||
+                    post.title.toLowerCase().includes(search.toLowerCase()) === true)
+                    )
             )
         } else {
             setFilteredPosts(null)
